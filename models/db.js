@@ -57,3 +57,18 @@ userSchema.methods.comparePassword = function(candidatePasswd, cb){
 
 /* build the user model */
 mongo.model('User', userSchema);
+
+/* Creating story schema */
+var storySchema = mongo.Schema({
+    author: {type:String},
+    title:{type:String, unique:true},
+    created_at:{type: Date, default:Date.now},
+    summary:{type:String},
+    content:{type:String},
+    imageLink:{type:String},
+    comments:[{body:String, commented_by:String, date:Date}],
+    slug:String
+});
+
+/* build the user model */
+mongo.model('Story', storySchema, 'stories');

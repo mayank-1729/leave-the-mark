@@ -1,43 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <title>Leave the marks</title>
-    <%- include('partials/head'); %>
+  <meta charset="UTF-8">
+  <title>Create your Story...</title>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.js"></script>
 </head>
+<div class="row">
+  <div class="container">
+    <blockquote>
 
-<body>
-
-    <div id="wrapper">
-
-        <%- include('partials/sidebarMenu'); %>
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                      <p align="center" class="headingFont">
-                        Leave the marks !!!
-                      </p>
-                      <br/>
-
-                   <blockquote class="mainLines">
-                    Your Stories.
-                  </blockquote>
-
-
-                  </div>
-           </div>
-         </div>
-      </div>
-
-
+      <h3>Hey <code><%=session.username%></code>, you are all set to create your story. Just provide us following
+        details</h3>
+      <ol>
+        <li>Title of your story</li>
+        <li>Upload an image to <a target="_blank" href="http://www.imgur.com">imgur</a> and provide us the direct link,
+          we prefer a 640*360 px image</li>
+        <li>A quick summary of your story, what it's all about</li>
+        <li>Actual story content</li>
+      </ol>
+    </blockquote>
+    <blockquote>
+      <h3>If you are curious to see how your story will be shown take a look at this <a target="_blank"
+          href="/stories/johnathons-story">story</a></h3>
+    </blockquote>
+    <blockquote>
+      <h3>Don't have anything to share? Check these <a href="/stories">stories</a></h3>
+    </blockquote>
   </div>
+</div>
+<br><br>
+<div class="row">
+  <div class="container">
 
-  <%- include('partials/jsIncludes'); %>
+    <form action="/add-story" method="POST">
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Title</label> 
+        <input type="text" class="form-control" name="title" placeholder="Give title to your story" required>
+      </div>
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Image Link</label> 
+        <input type="text" class="form-control" name="imageLink" placeholder="Upload the image to imgur and put the direct link here" required>
+      </div>
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Summary</label> 
+        <textarea type="text" class="form-control" name="summary" rows="4" placeholder="A short description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Post</label> 
+        <div class="col-lg-10">
+          <textarea type="text" class="form-control" name="content" rows="8" id="storyContent" required></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary">Submit your story</button>
+          <a type="button" class="btn btn-danger" href="/">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $('#storyContent').summernote({
+      height:250,
+          toolbar: [
 
-</body>
+         ['style', ['bold', 'italic', 'underline', 'clear']],
+         ['font', ['strikethrough', 'superscript', 'subscript']],
+         ['fontsize', ['fontsize']],
+         ['color', ['color']],
+         ['para', ['ul', 'ol', 'paragraph']],
+         ['height', ['height']],
+         ['link', ['linkDialogShow', 'unlink']],
+         ['table', ['table']]
 
+                 ]
+    })
+  })
+</script>
 </html>

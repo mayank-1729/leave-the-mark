@@ -26,11 +26,28 @@ app.use(session({secret:'marketvalue',resave: true, saveUninitialized: true}));
 app.get('/', routesHandler.index); //landing page
 app.get('/register', routesHandler.register); //registration page
 app.get('/login', routesHandler.login) //login page
+app.get('/new-story', routesHandler.newStory) //for adding new stories
+app.get('/techStack', routesHandler.techStack) //for displaying the technologies used.
 
 app.post('/newUser', userHandler.doCreate); //on click of registe button
-app.post('/authenticate', userHandler.authenticate) //on click of login button
+app.post('/authenticate', userHandler.authenticate) //on click of login button.
+app.post('/add-story', userHandler.addStory) //on submit add story to database.
+app.get('/stories', userHandler.getStories) //get all the stories.
+app.get('/stories/:story', userHandler.getStory) //get stories
+app.post('/stories/:slug/saveComment', userHandler.saveComments) //post comments
+
+app.get('/logout', routesHandler.logout) //logout of session
 
 
+app.use(function(req, res) {
+    console.log(chalk.red("Error: 404"));
+    res.status(404).render('404');
+});
+
+app.use(function(error, req, res, next) {
+    console.log(chalk.red('Error : 500'+error))
+    res.status(500).render('500');
+});
 
 
 
