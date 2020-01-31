@@ -6,6 +6,8 @@ var SALT_WORK_FACTOR = 10; //no of iteration to create for creating the hash.
 
 var dbUrl = 'mongodb://localhost/test'; //using Database credentials, create an url
 
+//var dbUrl = 'mongodb+srv://mayank:root@cluster0-quivo.mongodb.net/test?retryWrites=true&w=majority'
+
 mongo.connect(dbUrl); //connect to database
 
 mongo.connection.on('connected', function(){
